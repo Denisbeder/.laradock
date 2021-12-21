@@ -19,9 +19,9 @@ backend server1 { # Define one backend
       "User-Agent: Varnish Health Probe";
 
     .interval  = 5s; # check the health of each backend every 5 seconds
-    .timeout   = 1s; # timing out after 1 second.
+    .timeout   = 3s; # timing out after 1 second.
     .window    = 5;  # If 3 out of the last 5 polls succeeded the backend is considered healthy, otherwise it will be marked as sick
-    .threshold = 3;
+    .threshold = 2;
   }
 
   .first_byte_timeout     = 300s;   # How long to wait before we receive a first byte from our backend?

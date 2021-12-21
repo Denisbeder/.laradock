@@ -932,6 +932,7 @@ USER laradock
 # PYTHON2:
 ###########################################################################
 
+USER root
 ARG INSTALL_PYTHON=false
 
 RUN if [ ${INSTALL_PYTHON} = true ]; then \
@@ -947,6 +948,7 @@ RUN if [ ${INSTALL_PYTHON} = true ]; then \
 # PYTHON3:
 ###########################################################################
 
+USER root
 ARG INSTALL_PYTHON3=false
 
 RUN if [ ${INSTALL_PYTHON3} = true ]; then \
@@ -1361,6 +1363,9 @@ RUN if [ ${INSTALL_TRADER} = true ]; then \
 #
 
 USER root
+
+# Workaround: https://github.com/webpack/webpack/issues/14532
+ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Clean up
 RUN apt-get clean && \

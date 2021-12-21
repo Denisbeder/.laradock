@@ -1,5 +1,3 @@
-FROM apsl/thumbor
+FROM minimalcompact/thumbor
 
-CMD ["thumbor"]
-
-EXPOSE 8000
+EXPOSE 80

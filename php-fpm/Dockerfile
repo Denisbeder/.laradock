@@ -981,6 +981,8 @@ RUN if [ ${INSTALL_FAKETIME} = true ]; then \
 ARG LOCALE=POSIX
 ENV LC_ALL ${LOCALE}
 
+COPY www.conf /usr/local/etc/php-fpm.d/www.conf
+
 WORKDIR /var/www
 
 CMD ["php-fpm"]
