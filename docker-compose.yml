@@ -27,6 +27,8 @@ volumes:
 services:
   ### Workspace Utilities ##################################
   workspace:
+    container_name: workspace_${PHP_VERSION}
+    restart: unless-stopped
     container_name: workspace
     build:
       context: ./workspace
@@ -146,6 +148,8 @@ services:
 
   ### PHP-FPM ##############################################
   php-fpm:
+    container_name: php-fpm_${PHP_VERSION}
+    restart: unless-stopped
     build:
       context: ./php-fpm
       args:
@@ -243,6 +247,8 @@ services:
 
   ### PHP Worker ############################################
   php-worker:
+    container_name: php-worker_${PHP_VERSION}
+    restart: unless-stopped
     build:
       context: ./php-worker
       args:
@@ -284,6 +290,8 @@ services:
 
   ### Laravel Horizon ############################################
 #  laravel-horizon:
+#    container_name: laravel-horizon_${PHP_VERSION}
+#    restart: unless-stopped
 #    build:
 #      context: ./laravel-horizon
 #      args:
@@ -320,6 +328,8 @@ services:
 
   ### NGINX Server #########################################
   nginx:
+    container_name: nginx_${PHP_VERSION}
+    restart: unless-stopped
     build:
       context: ./nginx
       args:
@@ -345,6 +355,8 @@ services:
 
   ### Minio ################################################
   minio:
+    container_name: minio_${PHP_VERSION}
+    restart: unless-stopped
     build: ./minio
     volumes:
       - ${DATA_PATH_HOST}/minio/data:/export
@@ -361,6 +373,8 @@ services:
 
   ### MySQL ################################################
 #  mysql:
+#    container_name: mysql_${PHP_VERSION}
+#    restart: unless-stopped
 #    build:
 #      context: ./mysql
 #      args:
@@ -381,6 +395,8 @@ services:
 
   ### Thumbor #########################################
   thumbor:
+    container_name: thumbor_${PHP_VERSION}
+    restart: unless-stopped
     build: ./thumbor
     volumes:
       - ${DATA_PATH_HOST}/thumbor/data:/data
@@ -424,6 +440,8 @@ services:
 
   ### MariaDB ##############################################
   mariadb:
+    container_name: mariadb_${PHP_VERSION}
+    restart: unless-stopped
     build:
       context: ./mariadb
       args:
@@ -447,6 +465,8 @@ services:
 
   ### PostgreSQL ###########################################
 #  postgres:
+#    container_name: postgres_${PHP_VERSION}
+#    restart: unless-stopped
 #    build:
 #      context: ./postgres
 #      args:
@@ -465,6 +485,8 @@ services:
 
   ### MongoDB ##############################################
 #  mongo:
+#    container_name: mongo_${PHP_VERSION}
+#    restart: unless-stopped
 #    build: ./mongo
 #    ports:
 #      - "${MONGODB_PORT}:27017"
@@ -479,6 +501,8 @@ services:
 
   ### Redis ################################################
   redis:
+    container_name: redis_${PHP_VERSION}
+    restart: unless-stopped
     build: ./redis
     volumes:
       - ${DATA_PATH_HOST}/redis:/data
@@ -489,6 +513,8 @@ services:
 
   ### Memcached ############################################
 #  memcached:
+#    container_name: memcached_${PHP_VERSION}
+#    restart: unless-stopped
 #    build: ./memcached
 #    volumes:
 #      - ${DATA_PATH_HOST}/memcached:/var/lib/memcached
@@ -501,6 +527,8 @@ services:
 
   ### RabbitMQ #############################################
   rabbitmq:
+    container_name: rabbitmq_${PHP_VERSION}
+    restart: unless-stopped
     build: ./rabbitmq
     ports:
       - "${RABBITMQ_NODE_HOST_PORT}:5672"
@@ -520,6 +548,8 @@ services:
 
   ### ElasticSearch ########################################
   elasticsearch:
+    container_name: elasticsearch_${PHP_VERSION}
+    restart: unless-stopped
     build:
       context: ./elasticsearch
       args:
@@ -563,6 +593,7 @@ services:
 
   ### Varnish ##########################################
   proxy:
+    restart: unless-stopped
     container_name: proxy
     build: ./varnish
     expose:
@@ -584,6 +615,8 @@ services:
 
   ### HAProxy ####################################
 #  haproxy:
+#    container_name: haproxy_${PHP_VERSION}
+#    restart: unless-stopped
 #    build: ./haproxy
 #    ports:
 #      - "${HAPROXY_HOST_HTTP_PORT}:8085"
@@ -595,6 +628,8 @@ services:
 
   ### Laravel Echo Server #######################################
 #  laravel-echo-server:
+#    container_name: laravel-echo-server_${PHP_VERSION}
+#    restart: unless-stopped
 #    build:
 #      context: ./laravel-echo-server
 #    volumes:
@@ -609,6 +644,8 @@ services:
 
   ### Docker-in-Docker ################################################
   docker-in-docker:
+    container_name: docker-in-docker_${PHP_VERSION}
+    restart: unless-stopped
     image: docker:19.03-dind
     environment:
       DOCKER_TLS_SAN: DNS:docker-in-docker
@@ -623,6 +660,8 @@ services:
 
   ### NetData ################################################
   netdata:
+    container_name: netdata_${PHP_VERSION}
+    restart: unless-stopped
     image: netdata/netdata:latest
     cap_add:
       - SYS_PTRACE
